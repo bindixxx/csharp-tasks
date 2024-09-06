@@ -181,22 +181,24 @@ foreach (var item in a)
 
 
 //7 task
-var b = Console.ReadLine().Split(' ');
-var c = new List<int>();
-foreach (var item in b)
-    c.Add(int.Parse(item));
-int left = 0;
-int right = c.Count - 1;
-while (left <= right)
+List<int> a = new List<int>();
+for (int i = 0; i < 6; i++)
+    a.Add(int.Parse(Console.ReadLine()));
+for (int i = 0; i < a.Count - 1; i++)
 {
-    int middle = (left + right) / 2;
-    if (c[middle] == 7)
+    bool sorted = true;
+    for (int j = 0; j < a.Count - 1 - i; j++)
     {
-        Console.WriteLine($"Число 7 находится в ячейке {middle}");
-        break;
+        if (a[j] > a[j + 1])
+        {
+            int temp = a[j];
+            a[j] = a[j + 1];
+            a[j + 1] = temp;
+            sorted = false;
+        }
     }
-    else if (c[middle] < 7)
-        left = middle + 1;
-    else
-        right = middle - 1;
+    if (sorted)
+        break;
 }
+foreach (var item in a)
+    Console.WriteLine(item);
